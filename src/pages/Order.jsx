@@ -7,10 +7,12 @@ import {
   ChevronDown,
   X,
   Circle,
+  BlueLine,
+  Menu,
 } from "../components";
 import { equals, range } from "ramda";
 import { useHistory, Link, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import anime from "animejs";
 
 function Tabs() {
@@ -55,66 +57,117 @@ function Tabs() {
 }
 
 function Products() {
+  const [isExpand, setExpand] = useState(true);
+
   return (
-    <div className="flex flex-col items-center py-4 overflow-hidden">
-      <h1 className="text-primary text-6xl py-4">Black Tea</h1>
+    <div className="overflow-hidden">
+      <div className="flex flex-col items-center py-4">
+        <h1
+          className={clsx(
+            "text-primary py-2",
+            "transition-font-size duration-300 ease-out-expo",
+            isExpand ? "text-6xl" : "text-2xl"
+          )}
+          style={{
+            willChange: "font-size",
+          }}
+        >
+          Black Tea
+        </h1>
 
-      <div className="relative">
-        <div className="absolute left-1/2 bottom-2">
-          <RadialLine />
+        <div className="relative w-full">
+          <div className="absolute left-1/2 bottom-2">
+            <RadialLine />
+          </div>
+
+          <div className="flex justify-around items-center w-full relative">
+            <div
+              className={clsx(
+                "transition-width duration-300 ease-out-expo transform",
+                isExpand ? "w-1/3 scale-60" : "w-12 scale-100"
+              )}
+              style={{
+                willChange: "width transform",
+              }}
+            >
+              <img src="/assets/blacktea.png" alt="blacktea" />
+            </div>
+
+            <div
+              className={clsx(
+                "transition-width duration-300 ease-out-expo",
+                isExpand ? "w-1/3" : "w-12"
+              )}
+              style={{
+                willChange: "width transform",
+              }}
+            >
+              <img src="/assets/blacktea.png" alt="blacktea" />
+            </div>
+
+            <div
+              className={clsx(
+                "transition-width duration-300 ease-out-expo transform",
+                isExpand ? "w-1/3 scale-60" : "w-12 scale-100"
+              )}
+              style={{
+                willChange: "width transform",
+              }}
+            >
+              <img src="/assets/blacktea.png" alt="blacktea" />
+            </div>
+          </div>
         </div>
 
-        <div className="flex w-full relative">
-          <div className="w-32 transform scale-60">
-            <img src="/assets/blacktea.png" alt="blacktea" />
-          </div>
+        <nav className="flex w-full justify-center space-x-2 py-4">
+          {range(0, 5).map((key) => (
+            <a
+              key={key}
+              href=""
+              className={clsx(
+                "bg-primary w-3 h-3 rounded-full transform",
+                key === 2 || "scale-60 opacity-50"
+              )}
+            ></a>
+          ))}
+        </nav>
 
-          <div className="w-32">
-            <img src="/assets/blacktea.png" alt="blacktea" />
-          </div>
+        <div className="flex w-full justify-center">
+          <div className="bg-primary text-on-primary text-lg flex items-center px-2 py-1 space-x-2">
+            <button type="button" className="w-8">
+              <ChevronUp />
+            </button>
 
-          <div className="w-32 transform scale-60">
-            <img src="/assets/blacktea.png" alt="blacktea" />
+            <div className="flex items-center">
+              <input
+                type="text"
+                size="1"
+                value="1"
+                className="bg-transparent text-3xl text-center border-b-2"
+                readOnly
+              />
+
+              <span className="text-lg">CUP</span>
+            </div>
+
+            <button type="button" className="w-8 opacity-50">
+              <ChevronDown />
+            </button>
           </div>
         </div>
       </div>
 
-      <nav className="flex w-full justify-center space-x-2 py-4">
-        {range(0, 5).map((key) => (
-          <a
-            key={key}
-            href=""
-            className={clsx(
-              "bg-primary w-3 h-3 rounded-full transform",
-              key === 2 || "scale-60 opacity-50"
-            )}
-          ></a>
-        ))}
-      </nav>
-
-      <div className="flex w-full justify-center">
-        <div className="bg-primary text-on-primary text-lg flex items-center px-2 py-1 space-x-2">
-          <button type="button" className="w-8">
-            <ChevronUp />
-          </button>
-
-          <div className="flex items-center">
-            <input
-              type="text"
-              size="1"
-              value="1"
-              className="bg-transparent text-3xl text-center border-b-2"
-              readOnly
-            />
-
-            <span className="text-lg">CUP</span>
-          </div>
-
-          <button type="button" className="w-8 opacity-50">
-            <ChevronDown />
-          </button>
-        </div>
-      </div>
+      <button
+        type="button"
+        className="w-full"
+        onClick={() => setExpand(!isExpand)}
+      >
+        <BlueLine className="flex justify-center">
+          <span className="w-3 text-on-primary">
+            <Menu />
+          </span>
+        </BlueLine>
+      </button>
     </div>
   );
 }
@@ -189,7 +242,7 @@ export default function Order() {
   return (
     <Layout>
       <form onSubmit={onSubmit}>
-        <header className="sticky top-0 bg-background border-b-8 border-primary z-10">
+        <header className="sticky top-0 bg-background z-10">
           <div className="bg-primary text-on-primary mt-2 pt-1 pb-2 px-2">
             <Tabs />
           </div>

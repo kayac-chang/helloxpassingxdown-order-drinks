@@ -22,11 +22,21 @@ module.exports = {
         xxs: ".65rem",
       },
       scale: {
+        "10": ".1",
+        "20": ".2",
+        "30": ".3",
+        "40": ".4",
+        "50": ".5",
         "60": ".6",
         "80": ".8",
       },
       spacing: {
         18: "4.5rem",
+      },
+      transitionProperty: {
+        "font-size": "font-size",
+        width: "width transform",
+        height: "height transform",
       },
       transitionTimingFunction: {
         "in-expo": "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
