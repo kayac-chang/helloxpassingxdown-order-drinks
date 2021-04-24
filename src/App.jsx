@@ -12,7 +12,7 @@ function App() {
           <Entry />
         </Route>
 
-        <Route path="/order">
+        <Route path={["/products/:product", "/products"]}>
           <Order />
         </Route>
 

@@ -25,7 +25,7 @@ export default function Entry() {
           <RadialLine />
 
           <div className="absolute transform -translate-x-1/2 -translate-y-1/2">
-            <Link to="/order">
+            <Link to="/products/">
               <Circle
                 type="solid"
                 size="lg"

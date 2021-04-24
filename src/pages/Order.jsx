@@ -8,23 +8,47 @@ import {
   X,
   Circle,
 } from "../components";
-import { range } from "ramda";
-import { useHistory } from "react-router";
+import { equals, range } from "ramda";
+import { useHistory, Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import anime from "animejs";
 
 function Tabs() {
+  const products = ["Tea", "Fruit", "Soy", "Coffee", "Milk", "Ice"];
+  const { product } = useParams();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (products.includes(product)) return;
+
+    history.push(`/products/${products[0]}`);
+  }, [product]);
+
+  const isActive = equals(product);
+
   return (
-    <nav className="space-x-2 flex items-end overflow-scroll px-4">
-      {["Tea", "Fruit", "Soy", "Coffee", "Milk", "Ice"].map((item) => (
-        <a
+    <nav className="space-x-2 flex items-end overflow-scroll">
+      {products.map((item) => (
+        <Link
           key={item}
-          href={`/${item}`}
           className={clsx(
-            "h-full flex items-end px-2 py-1",
-            true ? "text-2xl border-b-2" : "text-lg"
+            "h-full flex items-end px-2 py-1 text-2xl",
+            "transform transition-transform ease-out-expo duration-300",
+            isActive(item) ? "scale-100 border-b-2" : "scale-75"
           )}
+          style={{ transformOrigin: "50% 75%" }}
+          to={`/products/${item}`}
+          onClick={({ target }) =>
+            anime({
+              targets: target.parentElement,
+              scrollLeft: target.offsetLeft - 10,
+              easing: "easeOutCirc",
+              duration: 350,
+            })
+          }
         >
           {item}
-        </a>
+        </Link>
       ))}
     </nav>
   );
@@ -166,7 +190,7 @@ export default function Order() {
     <Layout>
       <form onSubmit={onSubmit}>
         <header className="sticky top-0 bg-background border-b-8 border-primary z-10">
-          <div className="bg-primary text-on-primary mt-2 pt-1 pb-2">
+          <div className="bg-primary text-on-primary mt-2 pt-1 pb-2 px-2">
             <Tabs />
           </div>
 
