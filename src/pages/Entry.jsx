@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { Logo, Layout, RadialLine } from "../components";
+import { Logo, Layout, RadialLine, Circle } from "../components";
+
+const Text = {
+  Title: "卡牙潔莉塔",
+  SubTitle: "飲料店",
+  Link: "Order Now",
+  Footer: "Traditional Flavor - Classic Heritage",
+};
 
 export default function Entry() {
   return (
@@ -10,8 +17,8 @@ export default function Entry() {
 
       <main className="flex-1 flex justify-center">
         <h1 className="text-primary text-7xl flex flex-col items-center mt-16">
-          <span className="font-semibold">卡牙潔莉塔</span>
-          <span>飲料店</span>
+          <span className="font-semibold">{Text.Title}</span>
+          <span>{Text.SubTitle}</span>
         </h1>
 
         <div className="absolute bottom-1/4">
@@ -19,19 +26,20 @@ export default function Entry() {
 
           <div className="absolute transform -translate-x-1/2 -translate-y-1/2">
             <Link to="/order">
-              <div className="border-primary border-6 rounded-full p-0.5">
-                <div className="bg-primary text-on-primary p-4 rounded-full flex flex-col items-center -space-y-1">
-                  <span>Order</span>
-                  <span>Now</span>
-                </div>
-              </div>
+              <Circle
+                type="solid"
+                size="lg"
+                className="text-on-primary flex items-center justify-center text-center leading-5"
+              >
+                {Text.Link}
+              </Circle>
             </Link>
           </div>
         </div>
       </main>
 
       <footer className="text-primary text-lg flex justify-center py-4">
-        <p>Traditional Flavor - Classic Heritage</p>
+        <p>{Text.Footer}</p>
       </footer>
     </Layout>
   );

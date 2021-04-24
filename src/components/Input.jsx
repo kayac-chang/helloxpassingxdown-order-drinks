@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./Input.module.scss";
 
-import { BlueLine } from "./Line";
+import { BlueLine } from "./Shape";
 
 function Circle({ className }) {
   return (

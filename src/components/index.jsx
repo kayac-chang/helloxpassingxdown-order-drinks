@@ -1,4 +1,4 @@
 export * from "./Logo";
-export * from "./Line";
+export * from "./Shape";
 export * from "./Layout";
 export * from "./Input";

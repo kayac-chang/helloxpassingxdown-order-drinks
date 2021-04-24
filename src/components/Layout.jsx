@@ -1,4 +1,4 @@
-import { BlueLine } from "./Line";
+import { BlueLine } from "./Shape";
 
 export function Layout({ children }) {
   return (

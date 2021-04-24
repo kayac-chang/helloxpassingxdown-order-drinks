@@ -25,6 +25,9 @@ module.exports = {
         "60": ".6",
         "80": ".8",
       },
+      spacing: {
+        18: "4.5rem",
+      },
     },
   },
   variants: {
