@@ -1,4 +1,5 @@
-import { Logo, Layout, RadialLine, Button } from "../components";
+import { Link } from "react-router-dom";
+import { Logo, Layout, RadialLine } from "../components";
 
 export default function Entry() {
   return (
@@ -17,7 +18,14 @@ export default function Entry() {
           <RadialLine />
 
           <div className="absolute transform -translate-x-1/2 -translate-y-1/2">
-            <Button />
+            <Link to="/order">
+              <div className="border-primary border-6 rounded-full p-0.5">
+                <div className="bg-primary text-on-primary p-4 rounded-full flex flex-col items-center -space-y-1">
+                  <span>Order</span>
+                  <span>Now</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </main>
