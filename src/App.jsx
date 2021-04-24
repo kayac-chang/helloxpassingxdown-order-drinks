@@ -1,7 +1,7 @@
-import Entry from "./pages/entry";
+import Order from "./pages/Order";
 
 function App() {
-  return <Entry />;
+  return <Order />;
 }
 
 export default App;

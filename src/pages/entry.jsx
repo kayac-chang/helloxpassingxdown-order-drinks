@@ -1,4 +1,4 @@
-import { Logo, Layout, RadialLine, Button } from "./components";
+import { Logo, Layout, RadialLine, Button } from "../components";
 
 export default function Entry() {
   return (

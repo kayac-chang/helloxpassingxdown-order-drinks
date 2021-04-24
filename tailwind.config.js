@@ -18,6 +18,13 @@ module.exports = {
       fontFamily: {
         heiti: ["Heiti TC"],
       },
+      fontSize: {
+        xxs: ".65rem",
+      },
+      scale: {
+        "60": ".6",
+        "80": ".8",
+      },
     },
   },
   variants: {

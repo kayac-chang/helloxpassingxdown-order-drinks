@@ -9,7 +9,7 @@ export function Layout({ children }) {
         <BlueLine className="border-b-8" />
       </div>
 
-      <div className="flex-1 w-full flex flex-col overflow-hidden relative">
+      <div className="flex-1 w-full flex flex-col overflow-scroll relative">
         {children}
       </div>
 

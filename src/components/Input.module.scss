@@ -1,0 +1,56 @@
+@mixin reset {
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-track {
+      width: 100%;
+      cursor: pointer;
+
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+  }
+}
+
+@mixin thumb {
+  -webkit-appearance: none;
+
+  $size: 1rem;
+  width: var(--range-thunb-size, $size);
+  height: var(--range-thunb-size, $size);
+
+  border: 1px solid #000000;
+  border-radius: 100%;
+
+  background: currentColor;
+  cursor: pointer;
+}
+
+.range {
+  @include reset();
+
+  --range-thunb-size: 1.4rem;
+
+  input[type="range"] {
+    &::-webkit-slider-thumb {
+      @include thumb;
+    }
+    &::-moz-range-thumb {
+      @include thumb;
+    }
+    &::-ms-thumb {
+      @include thumb;
+    }
+  }
+}
