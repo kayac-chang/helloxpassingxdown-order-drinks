@@ -11,7 +11,7 @@ export function RadialLine() {
       {range(0, 21).map((key) => (
         <hr
           key={key}
-          className="block border-gray-500 border-opacity-20 border-t absolute right-0 transform"
+          className="block border-gray-500 border-opacity-10 border-t absolute right-0 transform"
           style={{
             width: `${100}vh`,
             transformOrigin: "right",
