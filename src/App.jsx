@@ -1,37 +1,4 @@
-import { Logo, BlueLine, RadialLine } from "./components";
-
-function Layout({ children }) {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen bg-background font-heiti py-4">
-      <div className="space-y-2 w-full">
-        <BlueLine className="border-b-4" />
-
-        <BlueLine className="border-b-8" />
-      </div>
-
-      <div className="flex-1 w-full flex flex-col overflow-hidden relative">
-        {children}
-      </div>
-
-      <div className="space-y-2 w-full">
-        <BlueLine className="border-b-4" />
-
-        <BlueLine className="border-b-8" />
-      </div>
-    </div>
-  );
-}
-
-function Button() {
-  return (
-    <button className="border-primary border-6 rounded-full p-0.5">
-      <div className="bg-primary text-on-primary p-4 rounded-full flex flex-col items-center -space-y-1">
-        <span>Order</span>
-        <span>Now</span>
-      </div>
-    </button>
-  );
-}
+import { Logo, Layout, RadialLine, Button } from "./components";
 
 function App() {
   return (
