@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { RadialLine, BlueLine, Menu, Input } from "../../components";
-import { range } from "ramda";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { debounce } from "../../utils";
 
 function Title({ children, isExpand }) {
   return (
@@ -62,6 +62,15 @@ export default function Products() {
   const [isExpand, setExpand] = useState(true);
   const [focus, setFocus] = useState(() => 0);
 
+  const onPointerMove = useCallback(
+    debounce((event) => {
+      const dir = -1 * Math.sign(event.movementX);
+
+      setFocus((focus) => focus + dir);
+    }),
+    []
+  );
+
   return (
     <div className="overflow-hidden">
       <div className="flex flex-col items-center py-4">
@@ -83,6 +92,7 @@ export default function Products() {
                 ? `calc(100vw * (${2 - focus} / 3))`
                 : "0",
             }}
+            onPointerMove={onPointerMove}
           >
             {products.map((product) => (
               <Product
