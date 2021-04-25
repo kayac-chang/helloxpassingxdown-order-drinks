@@ -1,4 +1,4 @@
-import { Range, X, Circle } from "../../components";
+import { Input, X, Circle } from "../../components";
 import { range } from "ramda";
 
 export default function Orders() {
@@ -33,7 +33,7 @@ export default function Orders() {
                       糖
                     </Circle>
 
-                    <Range />
+                    <Input.Range />
                   </div>
                 </li>
 
@@ -47,7 +47,7 @@ export default function Orders() {
                       冰
                     </Circle>
 
-                    <Range />
+                    <Input.Range />
                   </div>
                 </li>
               </ul>

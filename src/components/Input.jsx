@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import styles from "./Input.module.scss";
 
-import { BlueLine } from "./Shape";
+import { BlueLine, ChevronDown, ChevronUp } from "./Shape";
 
 function Circle({ className }) {
   return (
@@ -11,7 +11,7 @@ function Circle({ className }) {
   );
 }
 
-export function Range() {
+function Range() {
   return (
     <div
       className={clsx(
@@ -39,3 +39,33 @@ export function Range() {
     </div>
   );
 }
+
+function Number() {
+  return (
+    <div className="bg-primary text-on-primary text-lg flex items-center px-2 py-1 space-x-2">
+      <button type="button" className="w-8">
+        <ChevronUp />
+      </button>
+
+      <div className="flex items-center">
+        <input
+          type="text"
+          size="1"
+          value="1"
+          className="bg-transparent text-3xl text-center border-b-2"
+          readOnly
+        />
+
+        <span className="text-lg">CUP</span>
+      </div>
+
+      <button type="button" className="w-8 opacity-50">
+        <ChevronDown />
+      </button>
+    </div>
+  );
+}
+
+const Input = { Number, Range };
+
+export default Input;
