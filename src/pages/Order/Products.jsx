@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import { RadialLine, BlueLine, Menu, Input } from "../../components";
-import { useCallback, useState } from "react";
-import { debounce } from "../../utils";
+import { useSwipe } from "../../hooks";
+import { useEffect, useState } from "react";
+import { clamp } from "ramda";
 
 function Title({ children, isExpand }) {
   return (
@@ -32,11 +33,11 @@ function Expand({ onClick }) {
   );
 }
 
-function Product({ className, style, name, img, isExpand, isFocus }) {
+function Product({ className, style, name, img, isExpand, isFocus, onClick }) {
   return (
     <div
       className={clsx(
-        "transition-width duration-300 ease-out-expo transform",
+        "transition-width duration-300 ease-out-expo transform select-none",
         isFocus ? "scale-100" : "scale-60",
         isExpand ? "w-1/3" : "w-12",
         className
@@ -45,8 +46,9 @@ function Product({ className, style, name, img, isExpand, isFocus }) {
         willChange: "width transform",
         ...style,
       }}
+      onClick={onClick}
     >
-      <img src={img} alt={name} />
+      <img src={img} alt={name} draggable={false} />
     </div>
   );
 }
@@ -62,21 +64,24 @@ export default function Products() {
   const [isExpand, setExpand] = useState(true);
   const [focus, setFocus] = useState(() => 0);
 
-  const onPointerMove = useCallback(
-    debounce((event) => {
-      const dir = -1 * Math.sign(event.movementX);
+  const { direction, onPressStart, onPressEnd } = useSwipe();
 
-      setFocus((focus) => focus + dir);
-    }),
-    []
-  );
+  useEffect(() => {
+    setFocus((focus) => clamp(0, products.length - 1, direction + focus));
+  }, [direction]);
 
   return (
     <div className="overflow-hidden">
       <div className="flex flex-col items-center py-4">
         <Title isExpand={isExpand}>{"Black Tea"}</Title>
 
-        <div className="relative w-full">
+        <div
+          className="relative w-full"
+          onMouseDown={onPressStart}
+          onMouseUp={onPressEnd}
+          onTouchStart={onPressStart}
+          onTouchEnd={onPressEnd}
+        >
           <div className="absolute left-1/2 bottom-2">
             <RadialLine />
           </div>
@@ -92,14 +97,14 @@ export default function Products() {
                 ? `calc(100vw * (${2 - focus} / 3))`
                 : "0",
             }}
-            onPointerMove={onPointerMove}
           >
-            {products.map((product) => (
+            {products.map((product, index) => (
               <Product
                 key={product.name}
                 className="flex-shrink-0"
                 isExpand={isExpand}
                 isFocus={product.name === products[focus].name}
+                onClick={() => setFocus(index)}
                 {...product}
               />
             ))}
