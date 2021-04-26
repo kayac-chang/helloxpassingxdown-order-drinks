@@ -3,6 +3,7 @@ import { Layout } from "../../components";
 import Tabs from "./Tabs";
 import Products from "./Products";
 import Orders from "./Orders";
+import { useState } from "react";
 
 function Checkout() {
   return (
@@ -27,8 +28,18 @@ function Checkout() {
   );
 }
 
+const products = [
+  { name: "Black Tea A", img: "/assets/blacktea.png" },
+  { name: "Black Tea B", img: "/assets/blacktea.png" },
+  { name: "Black Tea C", img: "/assets/blacktea.png" },
+  { name: "Black Tea D", img: "/assets/blacktea.png" },
+  { name: "Black Tea E", img: "/assets/blacktea.png" },
+];
+
 export default function Order() {
   const history = useHistory();
+
+  const [orders, setOrders] = useState({});
 
   function onSubmit(event) {
     event.preventDefault();
@@ -44,10 +55,10 @@ export default function Order() {
             <Tabs />
           </div>
 
-          <Products />
+          <Products products={products} orders={orders} setOrders={setOrders} />
         </header>
 
-        <Orders />
+        <Orders orders={orders} setOrders={setOrders} />
 
         {/* <footer className="w-full bg-background text-on-primary border-t-8 border-primary px-8 py-4">
           <Checkout />

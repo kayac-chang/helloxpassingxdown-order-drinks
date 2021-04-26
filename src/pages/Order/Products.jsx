@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { RadialLine, BlueLine, Menu, Input } from "../../components";
 import { useSwipe } from "../../hooks";
-import { useEffect, useState } from "react";
-import { clamp } from "ramda";
+import { useCallback, useEffect, useState } from "react";
+import { clamp, slice, append } from "ramda";
 
 function Title({ children, isExpand }) {
   return (
@@ -53,24 +53,37 @@ function Product({ className, style, name, img, isExpand, isFocus, onClick }) {
   );
 }
 
-const products = [
-  { name: "Black Tea A", img: "/assets/blacktea.png" },
-  { name: "Black Tea B", img: "/assets/blacktea.png" },
-  { name: "Black Tea C", img: "/assets/blacktea.png" },
-  { name: "Black Tea D", img: "/assets/blacktea.png" },
-  { name: "Black Tea E", img: "/assets/blacktea.png" },
-];
-export default function Products() {
+export default function Products({ products, orders, setOrders }) {
   const [isExpand, setExpand] = useState(true);
   const [focus, setFocus] = useState(() => 0);
 
   const { direction, onPressStart, onPressEnd } = useSwipe();
 
-  const [value, setValue] = useState(0);
+  const isFocus = useCallback(
+    (product) => product.name === products[focus].name,
+    [focus]
+  );
 
   useEffect(() => {
     setFocus((focus) => clamp(0, products.length - 1, direction + focus));
   }, [direction]);
+
+  const name = products[focus].name;
+  const value = orders[name]?.length || 0;
+  const onChange = useCallback(
+    (newValue) => {
+      const apply =
+        newValue - value > 0
+          ? append({ id: btoa(performance.now()) })
+          : slice(0, -1);
+
+      setOrders((orders) => ({
+        ...orders,
+        [name]: apply(orders[name]),
+      }));
+    },
+    [name, value]
+  );
 
   return (
     <div className="overflow-hidden">
@@ -105,7 +118,7 @@ export default function Products() {
                 key={product.name}
                 className="flex-shrink-0"
                 isExpand={isExpand}
-                isFocus={product.name === products[focus].name}
+                isFocus={isFocus(product)}
                 onClick={() => setFocus(index)}
                 {...product}
               />
@@ -120,7 +133,7 @@ export default function Products() {
               key={product.name}
               className={clsx(
                 "bg-primary w-3 h-3 rounded-full transform",
-                product.name === products[focus].name || "scale-60 opacity-50"
+                isFocus(product) || "scale-60 opacity-50"
               )}
               onClick={() => setFocus(index)}
             ></button>
@@ -128,7 +141,7 @@ export default function Products() {
         </nav>
 
         <div className="flex w-full justify-center">
-          <Input.Number value={value} onChange={setValue} min={0} />
+          <Input.Number value={value} onChange={onChange} />
         </div>
       </div>
 
