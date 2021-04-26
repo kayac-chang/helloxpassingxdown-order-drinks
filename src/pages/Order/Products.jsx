@@ -66,6 +66,8 @@ export default function Products() {
 
   const { direction, onPressStart, onPressEnd } = useSwipe();
 
+  const [value, setValue] = useState(0);
+
   useEffect(() => {
     setFocus((focus) => clamp(0, products.length - 1, direction + focus));
   }, [direction]);
@@ -126,7 +128,7 @@ export default function Products() {
         </nav>
 
         <div className="flex w-full justify-center">
-          <Input.Number />
+          <Input.Number value={value} onChange={setValue} min={0} />
         </div>
       </div>
 

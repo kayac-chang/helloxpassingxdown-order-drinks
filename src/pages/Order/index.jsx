@@ -4,6 +4,29 @@ import Tabs from "./Tabs";
 import Products from "./Products";
 import Orders from "./Orders";
 
+function Checkout() {
+  return (
+    <div className="flex justify-between items-center">
+      <div className="flex items-end ">
+        <span className="text-4xl">$385</span>
+
+        <div className="space-x-1 pb-1">
+          <span className="">/5</span>
+          <span className="">CUPS</span>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        className="flex flex-col items-center bg-primary border border-on-primary px-4 py-2"
+      >
+        <span className="text-xl">PLACE</span>
+        <span>the order</span>
+      </button>
+    </div>
+  );
+}
+
 export default function Order() {
   const history = useHistory();
 
@@ -26,24 +49,9 @@ export default function Order() {
 
         <Orders />
 
-        <footer className="bg-background text-on-primary border-t-8 border-primary flex justify-between items-center px-8 py-4">
-          <div className="flex items-end ">
-            <span className="text-4xl">$385</span>
-
-            <div className="space-x-1 pb-1">
-              <span className="">/5</span>
-              <span className="">CUPS</span>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="flex flex-col items-center bg-primary border border-on-primary px-4 py-2"
-          >
-            <span className="text-xl">PLACE</span>
-            <span>the order</span>
-          </button>
-        </footer>
+        {/* <footer className="w-full bg-background text-on-primary border-t-8 border-primary px-8 py-4">
+          <Checkout />
+        </footer> */}
       </form>
     </Layout>
   );
