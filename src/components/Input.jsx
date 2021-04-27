@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { clamp } from "ramda";
 import { useCallback } from "react";
 import styles from "./Input.module.scss";
-import { BlueLine, ChevronDown, ChevronUp } from "./Shape";
+import { BlueLine, Minus, Plus } from "./Shape";
 import { digits } from "../utils";
 
 function Circle({ className }) {
@@ -66,7 +66,7 @@ function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
   return (
     <div className="bg-primary text-on-primary text-lg flex items-center px-2 py-1 space-x-2">
       <button type="button" className="w-8" onClick={() => update(value + 1)}>
-        <ChevronUp />
+        <Plus />
       </button>
 
       <div className="flex items-center">
@@ -90,7 +90,7 @@ function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
         )}
         onClick={() => update(value - 1)}
       >
-        <ChevronDown />
+        <Minus />
       </button>
     </div>
   );

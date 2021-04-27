@@ -89,21 +89,19 @@ export default function Orders({ orders, setOrders }) {
   );
 
   return (
-    <main className="flex-1 px-2">
-      <ol className="divide-y-2 divide-primary">
-        {orderList.map((order, index) => (
-          <li key={order.id}>
-            <Order
-              title={`${index + 1}. ${order.name}`}
-              onCancel={() => onCancel(order)}
-              sugar={order.sugar}
-              onSugarChange={(sugar) => onChange({ ...order, sugar })}
-              ice={order.ice}
-              onIceChange={(ice) => onChange({ ...order, ice })}
-            />
-          </li>
-        ))}
-      </ol>
-    </main>
+    <ol className="divide-y-2 divide-primary">
+      {orderList.map((order, index) => (
+        <li key={order.id}>
+          <Order
+            title={`${index + 1}. ${order.name}`}
+            onCancel={() => onCancel(order)}
+            sugar={order.sugar}
+            onSugarChange={(sugar) => onChange({ ...order, sugar })}
+            ice={order.ice}
+            onIceChange={(ice) => onChange({ ...order, ice })}
+          />
+        </li>
+      ))}
+    </ol>
   );
 }
