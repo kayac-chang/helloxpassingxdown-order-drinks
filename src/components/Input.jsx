@@ -13,7 +13,13 @@ function Circle({ className }) {
   );
 }
 
-function Range() {
+function Range({
+  value,
+  onChange,
+  max = value ? 10 ** digits(value) : 0,
+  min = 0,
+  step = 1,
+}) {
   return (
     <div
       className={clsx(
@@ -37,7 +43,15 @@ function Range() {
         <Circle className="absolute left-full transform -translate-x-1/2" />
       </div>
 
-      <input className="absolute" type="range" min="0" max="100" step="25" />
+      <input
+        className="absolute"
+        type="range"
+        value={value}
+        onChange={onChange}
+        min={min}
+        max={max}
+        step={step}
+      />
     </div>
   );
 }
