@@ -4,15 +4,28 @@ import Tabs from "./Tabs";
 import Products from "./Products";
 import Orders from "./Orders";
 import { useState } from "react";
+import { isEmpty } from "ramda";
 
-function Checkout() {
+function Checkout({ orders, products }) {
+  const { total, count } = Object.entries(orders).reduce(
+    ({ total, count }, [name, orders]) => {
+      const { price } = products.find((product) => product.name === name);
+
+      return {
+        total: total + orders.length * price,
+        count: count + orders.length,
+      };
+    },
+    { total: 0, count: 0 }
+  );
+
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-end ">
-        <span className="text-4xl">$385</span>
+        <span className="text-4xl">${total}</span>
 
         <div className="space-x-1 pb-1">
-          <span className="">/5</span>
+          <span className="">/{count}</span>
           <span className="">CUPS</span>
         </div>
       </div>
@@ -29,11 +42,11 @@ function Checkout() {
 }
 
 const products = [
-  { name: "Black Tea A", img: "/assets/blacktea.png" },
-  { name: "Black Tea B", img: "/assets/blacktea.png" },
-  { name: "Black Tea C", img: "/assets/blacktea.png" },
-  { name: "Black Tea D", img: "/assets/blacktea.png" },
-  { name: "Black Tea E", img: "/assets/blacktea.png" },
+  { name: "Black Tea A", img: "/assets/blacktea.png", price: 50 },
+  { name: "Black Tea B", img: "/assets/blacktea.png", price: 100 },
+  { name: "Black Tea C", img: "/assets/blacktea.png", price: 75 },
+  { name: "Black Tea D", img: "/assets/blacktea.png", price: 55 },
+  { name: "Black Tea E", img: "/assets/blacktea.png", price: 30 },
 ];
 
 export default function Order() {
@@ -60,9 +73,11 @@ export default function Order() {
 
         <Orders orders={orders} setOrders={setOrders} />
 
-        {/* <footer className="w-full bg-background text-on-primary border-t-8 border-primary px-8 py-4">
-          <Checkout />
-        </footer> */}
+        {!isEmpty(orders) && (
+          <footer className="w-full bg-background text-on-primary border-t-8 border-primary px-8 py-4">
+            <Checkout products={products} orders={orders} />
+          </footer>
+        )}
       </form>
     </Layout>
   );
