@@ -1,22 +1,21 @@
+import clsx from "clsx";
 import { BlueLine } from "./Shape";
 
-export function Layout({ children }) {
+export function Layout({ children, className }) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-background font-heiti py-4">
-      <div className="space-y-2 w-full">
-        <BlueLine className="border-b-4" />
+    <div className="overflow-hidden relative">
+      <div className="h-screen bg-background font-heiti py-4 flex flex-col overflow-scroll">
+        <div className="space-y-2 w-full">
+          <BlueLine className="border-b-4" />
+          <BlueLine className="border-b-8" />
+        </div>
 
-        <BlueLine className="border-b-8" />
-      </div>
+        <div className={clsx("flex-1", className)}>{children}</div>
 
-      <div className="flex-1 w-full flex flex-col overflow-scroll relative">
-        {children}
-      </div>
-
-      <div className="space-y-2 w-full">
-        <BlueLine className="border-b-4" />
-
-        <BlueLine className="border-b-8" />
+        <div className="space-y-2 w-full">
+          <BlueLine className="border-b-8" />
+          <BlueLine className="border-b-4" />
+        </div>
       </div>
     </div>
   );

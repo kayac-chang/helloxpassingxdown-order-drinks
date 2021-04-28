@@ -75,7 +75,7 @@ function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
           value={value}
           max={max}
           min={min}
-          className="bg-transparent text-3xl text-center border-b-2"
+          className="bg-transparent text-3xl text-center"
           readOnly
         />
 

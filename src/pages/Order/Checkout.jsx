@@ -13,18 +13,18 @@ export default function Checkout({ orders, products }) {
     { total: 0, count: 0 }
   );
 
+  if (count <= 0) return <></>;
+
   return (
     <div className="flex justify-between items-center">
-      {count > 0 && (
-        <div className="flex items-end ">
-          <span className="text-4xl">${total}</span>
+      <div className="flex items-end ">
+        <span className="text-4xl">${total}</span>
 
-          <div className="space-x-1 pb-1">
-            <span>/{count}</span>
-            <span>CUPS</span>
-          </div>
+        <div className="space-x-1 pb-1">
+          <span>/{count}</span>
+          <span>CUPS</span>
         </div>
-      )}
+      </div>
 
       <button
         type="submit"
@@ -33,14 +33,8 @@ export default function Checkout({ orders, products }) {
           count || "pointer-events-none"
         )}
       >
-        {count ? (
-          <>
-            <span className="text-xl">PLACE</span>
-            <span>the order</span>
-          </>
-        ) : (
-          <span>GET ME ONE</span>
-        )}
+        <span className="text-xl">PLACE</span>
+        <span>the order</span>
       </button>
     </div>
   );

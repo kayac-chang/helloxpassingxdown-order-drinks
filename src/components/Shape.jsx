@@ -14,24 +14,6 @@ export function BlueLine({ className, children }) {
   );
 }
 
-export function RadialLine() {
-  return (
-    <div className="relative">
-      {range(0, 21).map((key) => (
-        <hr
-          key={key}
-          className="block border-gray-500 border-opacity-10 border-t absolute right-0 transform"
-          style={{
-            width: `${100}vh`,
-            transformOrigin: "right",
-            "--tw-rotate": `${-10 + key * 10}deg`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export function Circle({ type, size, children, className }) {
   return (
     <div

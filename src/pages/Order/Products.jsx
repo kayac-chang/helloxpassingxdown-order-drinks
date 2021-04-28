@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { RadialLine, BlueLine, Menu, Input } from "../../components";
+import { BlueLine, Menu, Input } from "../../components";
 import { useSwipe } from "../../hooks";
 import { useCallback, useEffect, useState } from "react";
 import { clamp, slice, append } from "ramda";
@@ -88,7 +88,7 @@ export default function Products({ products, orders, setOrders }) {
   return (
     <div className="overflow-hidden">
       <div className="flex flex-col items-center py-4">
-        <Title isExpand={isExpand}>{"Black Tea"}</Title>
+        <Title isExpand={isExpand}>{name}</Title>
 
         <div
           className="relative w-full"
@@ -97,10 +97,6 @@ export default function Products({ products, orders, setOrders }) {
           onTouchStart={onPressStart}
           onTouchEnd={onPressEnd}
         >
-          <div className="absolute left-1/2 bottom-2">
-            <RadialLine />
-          </div>
-
           <div
             className={clsx(
               "flex flex-nowrap justify-around transform",

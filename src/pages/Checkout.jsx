@@ -1,5 +1,5 @@
 import { range } from "ramda";
-import { Logo, Layout, RadialLine } from "../components";
+import { Logo, Layout } from "../components";
 
 export default function Checkout() {
   return (
@@ -37,10 +37,6 @@ export default function Checkout() {
       </main>
 
       <footer className="px-8 py-4 relative">
-        <div className="absolute left-1/2 mt-4">
-          <RadialLine />
-        </div>
-
         <button className="bg-primary text-on-primary px-4 py-2 w-full border-2 border-on-primary relative">
           SHARE THE PURCHASE
         </button>
