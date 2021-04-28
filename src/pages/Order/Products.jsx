@@ -4,13 +4,12 @@ import { useSwipe } from "../../hooks";
 import { useCallback, useEffect, useState } from "react";
 import { clamp, slice, append } from "ramda";
 
-function Title({ children, isExpand }) {
+function Title({ children }) {
   return (
     <h1
       className={clsx(
-        "text-primary py-2",
-        "transition-font-size duration-300 ease-out-expo",
-        isExpand ? "text-6xl" : "text-2xl"
+        "text-primary py-2 text-6xl",
+        "transition-font-size duration-300 ease-out-expo"
       )}
       style={{
         willChange: "font-size",
@@ -33,13 +32,12 @@ function Expand({ onClick }) {
   );
 }
 
-function Product({ className, style, name, img, isExpand, isFocus, onClick }) {
+function Product({ className, style, name, img, isFocus, onClick }) {
   return (
     <div
       className={clsx(
-        "transition-width duration-300 ease-out-expo transform select-none",
+        "transition-width duration-300 ease-out-expo transform select-none w-1/3",
         isFocus ? "scale-100" : "scale-60",
-        isExpand ? "w-1/3" : "w-12",
         className
       )}
       style={{
@@ -54,7 +52,6 @@ function Product({ className, style, name, img, isExpand, isFocus, onClick }) {
 }
 
 export default function Products({ products, orders, setOrders }) {
-  const [isExpand, setExpand] = useState(true);
   const [focus, setFocus] = useState(() => 0);
 
   const { direction, onPressStart, onPressEnd } = useSwipe();
@@ -88,7 +85,7 @@ export default function Products({ products, orders, setOrders }) {
   return (
     <div className="overflow-hidden">
       <div className="flex flex-col items-center py-4">
-        <Title isExpand={isExpand}>{name}</Title>
+        <Title>{name}</Title>
 
         <div
           className="relative w-full"
@@ -104,16 +101,13 @@ export default function Products({ products, orders, setOrders }) {
             )}
             style={{
               willChange: "transform",
-              "--tw-translate-x": isExpand
-                ? `calc(100vw * (${2 - focus} / 3))`
-                : "0",
+              "--tw-translate-x": `calc(100vw * (${2 - focus} / 3))`,
             }}
           >
             {products.map((product, index) => (
               <Product
                 key={product.name}
                 className="flex-shrink-0"
-                isExpand={isExpand}
                 isFocus={isFocus(product)}
                 onClick={() => setFocus(index)}
                 {...product}
@@ -139,9 +133,9 @@ export default function Products({ products, orders, setOrders }) {
         <div className="flex w-full justify-center">
           <Input.Number value={value} onChange={onChange} />
         </div>
-      </div>
 
-      <Expand onClick={() => setExpand(!isExpand)} />
+        <BlueLine className="mt-2 h-2" />
+      </div>
     </div>
   );
 }
