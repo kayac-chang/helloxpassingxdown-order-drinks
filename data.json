@@ -1,6 +1,7 @@
 [
   {
     "name": "鶴頂紅茶",
+    "type": "私藏古法茶",
     "options": [
       { "type": "M", "price": 30 },
       { "type": "L", "price": 35 }
