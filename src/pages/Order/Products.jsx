@@ -4,19 +4,12 @@ import { useSwipe } from "../../hooks";
 import { useCallback, useEffect, useState } from "react";
 import { clamp, slice, append } from "ramda";
 
-function Title({ children }) {
+function Title({ name, price }) {
   return (
-    <h1
-      className={clsx(
-        "text-primary py-2 text-6xl",
-        "transition-font-size duration-300 ease-out-expo"
-      )}
-      style={{
-        willChange: "font-size",
-      }}
-    >
-      {children}
-    </h1>
+    <div className="py-2">
+      <h1 className="text-5xl text-primary">{name}</h1>
+      <h2 className="text-2xl text-on-primary">${price}</h2>
+    </div>
   );
 }
 
@@ -66,6 +59,7 @@ export default function Products({ products, orders, setOrders }) {
   }, [direction]);
 
   const name = products[focus].name;
+  const price = products[focus].price;
   const value = orders[name]?.length || 0;
   const onChange = useCallback(
     (newValue) => {
@@ -84,8 +78,8 @@ export default function Products({ products, orders, setOrders }) {
 
   return (
     <div className="overflow-hidden">
-      <div className="flex flex-col items-center py-4">
-        <Title>{name}</Title>
+      <div className="flex flex-col items-center">
+        <Title name={name} price={price} />
 
         <div
           className="relative w-full"

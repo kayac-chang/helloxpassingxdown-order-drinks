@@ -1,19 +1,25 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Input, X, Circle } from "../../components";
 
 function Order({ title, onCancel, sugar, ice, onSugarChange, onIceChange }) {
   return (
     <section className="py-2 text-primary">
-      <header>
-        <div className="flex items-center justify-between text-on-primary">
-          <h3 className="text-lg">{title}</h3>
+      <header className="flex items-center justify-between ">
+        <h3 className="text-lg text-on-primary">{title}</h3>
 
-          <button type="button" className="w-4" onClick={onCancel}>
+        <div className="flex items-center space-x-2">
+          <div className="flex justify-end text-xs">
+            Drag to build your drink
+          </div>
+
+          <button
+            type="button"
+            className="w-5 text-on-primary"
+            onClick={onCancel}
+          >
             <X />
           </button>
         </div>
-
-        <div className="flex justify-end text-xs">Drag to build your drink</div>
       </header>
 
       <ul>

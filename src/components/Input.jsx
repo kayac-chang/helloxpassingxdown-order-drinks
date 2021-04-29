@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { clamp } from "ramda";
 import { useCallback } from "react";
 import styles from "./Input.module.scss";
-import { BlueLine, Minus, Plus } from "./Shape";
+import { BlueLine, Minus, Plus, Check } from "./Shape";
 import { digits } from "../utils";
 
 function Circle({ className }) {
@@ -96,4 +96,28 @@ function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
   );
 }
 
-export default { Range, Number };
+function Checkbox({ value = true, onChange }) {
+  return (
+    <label className="flex items-center space-x-2 text-xs">
+      <input
+        type="checkbox"
+        className=" hidden"
+        value={value}
+        onChange={onChange}
+      />
+
+      <div
+        className={clsx(
+          "w-4 h-4 border border-primary",
+          value && " bg-primary text-white"
+        )}
+      >
+        {value && <Check />}
+      </div>
+
+      <span>Same as the one above</span>
+    </label>
+  );
+}
+
+export default { Range, Number, Checkbox };
