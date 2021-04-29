@@ -1,20 +1,6 @@
 import clsx from "clsx";
 
-export default function Checkout({ orders, products }) {
-  const { total, count } = Object.entries(orders).reduce(
-    ({ total, count }, [name, orders]) => {
-      const { price } = products.find((product) => product.name === name);
-
-      return {
-        total: total + orders.length * price,
-        count: count + orders.length,
-      };
-    },
-    { total: 0, count: 0 }
-  );
-
-  if (count <= 0) return <></>;
-
+export default function Checkout({ total, count }) {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-end ">
