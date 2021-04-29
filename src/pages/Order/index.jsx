@@ -6,17 +6,11 @@ import Tabs from "./Tabs";
 import Products from "./Products";
 import Orders from "./Orders";
 import Checkout from "./Checkout";
-
-const products = [
-  { name: "Black Tea", img: "/assets/01.png", price: 50 },
-  { name: "Boboa Tea", img: "/assets/02.png", price: 100 },
-  { name: "Milk Tea", img: "/assets/03.png", price: 75 },
-  { name: "Black Tea D", img: "/assets/01.png", price: 55 },
-  { name: "Black Tea E", img: "/assets/01.png", price: 30 },
-];
+import { useProducts } from "../../contexts/products";
 
 export default function Order() {
   const history = useHistory();
+  const products = useProducts();
   const [orders, setOrders] = useState({});
 
   const { total, count } = Object.entries(orders).reduce(
@@ -35,6 +29,10 @@ export default function Order() {
     event.preventDefault();
 
     history.push("/checkout");
+  }
+
+  if (products.length <= 0) {
+    return <Layout></Layout>;
   }
 
   return (

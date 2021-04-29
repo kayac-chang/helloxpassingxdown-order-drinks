@@ -3,7 +3,7 @@ import { Logo, Layout } from "../components";
 
 export default function Checkout() {
   return (
-    <Layout className=" ">
+    <Layout>
       <header className="flex justify-center z-10">
         <Logo />
       </header>

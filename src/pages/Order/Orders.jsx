@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Input, X, Circle } from "../../components";
 
 function Order({ title, onCancel, sugar, ice, onSugarChange, onIceChange }) {
