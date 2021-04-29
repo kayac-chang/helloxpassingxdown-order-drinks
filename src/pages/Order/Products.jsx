@@ -12,7 +12,6 @@ function Title({ name, price }) {
     </div>
   );
 }
-
 function Product({ className, style, name, img, isFocus, onClick }) {
   return (
     <div
