@@ -13,18 +13,6 @@ function Title({ name, price }) {
   );
 }
 
-function Expand({ onClick }) {
-  return (
-    <button type="button" className="w-full" onClick={onClick}>
-      <BlueLine className="flex justify-center">
-        <span className="w-3 text-on-primary">
-          <Menu />
-        </span>
-      </BlueLine>
-    </button>
-  );
-}
-
 function Product({ className, style, name, img, isFocus, onClick }) {
   return (
     <div
@@ -125,9 +113,14 @@ export default function Products({ products, orders, setOrders }) {
         </nav>
 
         <div className="flex w-full justify-center">
-          <Input.Number value={value} onChange={onChange} />
+          <Input.Number
+            value={value}
+            unit={`CUP${value > 1 ? "S" : ""}`}
+            onChange={onChange}
+          />
         </div>
       </div>
+
       <BlueLine className="mt-2 h-2" />
     </div>
   );

@@ -56,7 +56,7 @@ function Range({
   );
 }
 
-function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
+function Number({ value, unit, onChange, max = 10 ** digits(value), min = 0 }) {
   const update = useCallback((value) => onChange(clamp(min, max, value)), [
     onChange,
     min,
@@ -79,7 +79,7 @@ function Number({ value, onChange, max = 10 ** digits(value), min = 0 }) {
           readOnly
         />
 
-        <span className="text-lg">CUP</span>
+        <span className="text-lg">{unit}</span>
       </div>
 
       <button

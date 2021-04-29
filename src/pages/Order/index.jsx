@@ -19,8 +19,6 @@ export default function Order() {
   const history = useHistory();
   const [orders, setOrders] = useState({});
 
-  console.log(orders);
-
   const { total, count } = Object.entries(orders).reduce(
     ({ total, count }, [name, orders]) => {
       const { price } = products.find((product) => product.name === name);

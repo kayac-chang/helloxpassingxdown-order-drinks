@@ -6,9 +6,8 @@ export default function Checkout({ total, count }) {
       <div className="flex items-end ">
         <span className="text-4xl">${total}</span>
 
-        <div className="space-x-1 pb-1">
-          <span>/{count}</span>
-          <span>CUPS</span>
+        <div className="pb-1">
+          /{count} CUP{count > 1 && "S"}
         </div>
       </div>
 
