@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { BlueLine, Menu, Input } from "../../components";
+import { BlueLine, Input } from "../../components";
 import { useSwipe } from "../../hooks";
 import { useCallback, useEffect, useState } from "react";
 import { clamp, slice, append } from "ramda";
