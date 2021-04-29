@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { Logo, Layout, Circle } from "../components";
 
 const Text = {
-  Title: "卡牙潔莉塔",
-  SubTitle: "飲料店",
+  Title: "LE BOBOBA",
   Link: "Order Now",
   Footer: "Traditional Flavor - Classic Heritage",
 };
@@ -16,9 +15,8 @@ export default function Entry() {
       </header>
 
       <main className="flex-1 flex flex-col">
-        <h1 className="text-primary text-7xl flex flex-col items-center mt-16">
-          <span className="font-semibold">{Text.Title}</span>
-          <span>{Text.SubTitle}</span>
+        <h1 className="text-primary text-center font-semibold text-7xl flex flex-col items-center mt-16">
+          {Text.Title}
         </h1>
 
         <div className="flex justify-center mt-52">
@@ -26,7 +24,7 @@ export default function Entry() {
             <Circle
               type="solid"
               size="lg"
-              className="text-on-primary flex items-center justify-center text-center leading-5"
+              className="text-on-primary flex items-center justify-center text-center text-lg leading-5"
             >
               {Text.Link}
             </Circle>

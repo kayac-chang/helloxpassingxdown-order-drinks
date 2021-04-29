@@ -3,7 +3,7 @@ import { Input, X, Circle } from "../../components";
 
 function Order({ title, onCancel, sugar, ice, onSugarChange, onIceChange }) {
   return (
-    <section className="py-2 text-primary">
+    <section className="py-4 text-primary">
       <header className="flex items-center justify-between ">
         <h3 className="text-lg text-on-primary">{title}</h3>
 

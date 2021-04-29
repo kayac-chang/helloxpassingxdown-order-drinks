@@ -3,12 +3,12 @@ import { Logo, Layout } from "../components";
 
 export default function Checkout() {
   return (
-    <Layout>
+    <Layout className=" ">
       <header className="flex justify-center z-10">
         <Logo />
       </header>
 
-      <main className="flex-1 px-4 space-y-8 z-10">
+      <main className="flex-1 px-8 space-y-8 z-10 mt-6">
         <div className="py-4 text-primary">
           <h1 className="text-6xl">Thank you</h1>
 
@@ -16,7 +16,7 @@ export default function Checkout() {
         </div>
 
         <div className="flex divide-x divide-primary text-on-primary">
-          <div className="w-52">
+          <div className="flex-1">
             <ol className="space-y-4">
               {range(0, 4).map((key) => (
                 <li key={key}>
@@ -29,15 +29,15 @@ export default function Checkout() {
             </ol>
           </div>
 
-          <div className="flex-1 flex flex-col justify-center items-center px-4">
+          <div className="flex-1 flex flex-col justify-center items-center">
             <h2 className="text-4xl">$385</h2>
             <p className="w-full flex justify-end">/5 CUPS</p>
           </div>
         </div>
       </main>
 
-      <footer className="px-8 py-4 relative">
-        <button className="bg-primary text-on-primary px-4 py-2 w-full border-2 border-on-primary relative">
+      <footer className="px-8 py-4 relative mt-6">
+        <button className="bg-primary text-on-primary px-4 py-2 w-full border-2 border-on-primary relative text-xl">
           SHARE THE PURCHASE
         </button>
       </footer>

@@ -78,7 +78,7 @@ export default function Products({ products, orders, setOrders }) {
 
   return (
     <div className="overflow-hidden">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-4">
         <Title name={name} price={price} />
 
         <div
@@ -127,9 +127,8 @@ export default function Products({ products, orders, setOrders }) {
         <div className="flex w-full justify-center">
           <Input.Number value={value} onChange={onChange} />
         </div>
-
-        <BlueLine className="mt-2 h-2" />
       </div>
+      <BlueLine className="mt-2 h-2" />
     </div>
   );
 }

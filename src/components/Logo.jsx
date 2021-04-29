@@ -8,8 +8,8 @@ export function Logo({ className }) {
         className
       )}
     >
-      <span>Kayac Jarita</span>
-      <span>Boba Store</span>
+      <span className="font-semibold">LE BOBOBA</span>
+      <span>Online System</span>
     </h2>
   );
 }

@@ -27,7 +27,7 @@ function Range({
         "text-on-primary w-full relative flex items-center py-10"
       )}
     >
-      <div className="w-full border border-primary relative flex items-center text-xxs text-primary mx-3">
+      <div className="w-full border border-primary relative flex items-center text-xs text-primary mx-3">
         <div className="absolute -top-8 w-full flex justify-between">
           <span className="transform -translate-x-1/2">0%</span>
 
