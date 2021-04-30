@@ -30,6 +30,9 @@ module.exports = {
         "60": ".6",
         "80": ".8",
       },
+      maxWidth: {
+        xxs: "16rem",
+      },
       spacing: {
         18: "4.5rem",
       },

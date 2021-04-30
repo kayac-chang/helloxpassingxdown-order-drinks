@@ -6,7 +6,7 @@ import { clamp, slice, append } from "ramda";
 
 function Title({ name, price }) {
   return (
-    <div className="py-2">
+    <div className="py-2 max-w-xxs">
       <h1 className="text-5xl text-primary">{name}</h1>
       <h2 className="text-2xl text-on-primary">${price}</h2>
     </div>
@@ -32,14 +32,17 @@ function Product({ className, style, name, img, isFocus, onClick }) {
 }
 
 export default function Products({ products, orders, setOrders }) {
-  const [focus, setFocus] = useState(() => 0);
-
+  const [focus, setFocus] = useState(0);
   const { direction, onPressStart, onPressEnd } = useSwipe();
 
   const isFocus = useCallback(
     (product) => product.name === products[focus].name,
-    [focus]
+    [products, focus]
   );
+
+  useEffect(() => {
+    setFocus(0);
+  }, [products]);
 
   useEffect(() => {
     setFocus((focus) => clamp(0, products.length - 1, direction + focus));
@@ -77,12 +80,12 @@ export default function Products({ products, orders, setOrders }) {
         >
           <div
             className={clsx(
-              "flex flex-nowrap justify-around transform",
+              "flex flex-nowrap transform",
               "transition-transform duration-300"
             )}
             style={{
               willChange: "transform",
-              "--tw-translate-x": `calc(100vw * (${2 - focus} / 3))`,
+              "--tw-translate-x": `calc(100vw * (${1 - focus} / 3))`,
             }}
           >
             {products.map((product, index) => (

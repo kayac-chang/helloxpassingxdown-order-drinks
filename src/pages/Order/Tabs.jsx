@@ -4,26 +4,25 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import anime from "animejs";
 
-export default function Tabs() {
-  const products = ["Tea", "Fruit", "Soy", "Coffee", "Milk", "Ice"];
+export default function Tabs({ types }) {
   const { product } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    if (products.includes(product)) return;
+    if (types.includes(product)) return;
 
-    history.push(`/products/${products[0]}`);
+    history.push(`/products/${types[0]}`);
   }, [product]);
 
   const isActive = equals(product);
 
   return (
-    <nav className="space-x-2 flex items-end overflow-scroll">
-      {products.map((item) => (
+    <nav className="space-x-2 flex flex-nowrap items-end overflow-scroll">
+      {types.map((item) => (
         <Link
           key={item}
           className={clsx(
-            "h-full flex items-end px-2 py-1 text-2xl",
+            "h-full whitespace-nowrap px-2 py-1 text-2xl",
             "transform transition-transform ease-out-expo duration-300",
             isActive(item) ? "scale-100 border-b-2" : "scale-75"
           )}

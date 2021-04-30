@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Layout } from "../../components";
 
 import Tabs from "./Tabs";
@@ -10,6 +10,7 @@ import { useProducts } from "../../contexts/products";
 
 export default function Order() {
   const history = useHistory();
+  const { product } = useParams();
   const products = useProducts();
   const [orders, setOrders] = useState({});
 
@@ -40,10 +41,14 @@ export default function Order() {
       <form onSubmit={onSubmit} className="flex flex-col">
         <header className="bg-background z-10">
           <div className="bg-primary text-on-primary pt-1 pb-2 px-2">
-            <Tabs />
+            <Tabs types={[...new Set(products.map(({ type }) => type))]} />
           </div>
 
-          <Products products={products} orders={orders} setOrders={setOrders} />
+          <Products
+            products={products.filter(({ type }) => type === product)}
+            orders={orders}
+            setOrders={setOrders}
+          />
         </header>
 
         <main className="flex-1 px-2">

@@ -1,20 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { getDrinks } from "../api";
 
 const ProductContext = createContext(undefined);
+
+function toProduct({ name, type, options }) {
+  const img = "/assets/01.png";
+  const price = options[0].price;
+
+  return { name, type, img, price };
+}
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const products = [
-      { name: "Black Tea", img: "/assets/01.png", price: 50 },
-      { name: "Boboa Tea", img: "/assets/02.png", price: 100 },
-      { name: "Milk Tea", img: "/assets/03.png", price: 75 },
-      { name: "Black Tea D", img: "/assets/01.png", price: 55 },
-      { name: "Black Tea E", img: "/assets/01.png", price: 30 },
-    ];
-
-    setTimeout(() => setProducts(products), 1000);
+    getDrinks()
+      .then((data) => data.map(toProduct))
+      .then(setProducts);
   }, []);
 
   return (
