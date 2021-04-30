@@ -1,8 +1,11 @@
 import clsx from "clsx";
+import { useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { clamp } from "ramda";
+
 import { BlueLine, Input } from "../../components";
 import { useSwipe } from "../../hooks";
-import { useCallback, useEffect, useState } from "react";
-import { clamp, slice, append } from "ramda";
+import { useOrderDispatch } from "../../contexts/orders";
 
 function Title({ name, price }) {
   return (
@@ -31,37 +34,31 @@ function Product({ className, style, name, img, isFocus, onClick }) {
   );
 }
 
-export default function Products({ products, orders, setOrders }) {
-  const [focus, setFocus] = useState(0);
+export default function Products({ products, orders }) {
+  const { product } = useParams();
   const { direction, onPressStart, onPressEnd } = useSwipe();
+  const dispatch = useOrderDispatch();
 
-  const isFocus = useCallback(
-    (product) => product.name === products[focus].name,
-    [products, focus]
-  );
+  const [focus, setFocus] = useState(0);
 
   useEffect(() => {
     setFocus(0);
-  }, [products]);
+  }, [product]);
 
   useEffect(() => {
     setFocus((focus) => clamp(0, products.length - 1, direction + focus));
   }, [direction]);
 
-  const name = products[focus].name;
-  const price = products[focus].price;
+  const display = products.filter(({ type }) => type === product);
+  const name = display[focus].name;
+  const price = display[focus].price;
   const value = orders[name]?.length || 0;
+
   const onChange = useCallback(
     (newValue) => {
-      const apply =
-        newValue - value > 0
-          ? append({ id: btoa(performance.now()) })
-          : slice(0, -1);
+      const type = newValue - value > 0 ? "add" : "remove";
 
-      setOrders((orders) => ({
-        ...orders,
-        [name]: apply(orders[name]),
-      }));
+      dispatch({ type, payload: { name } });
     },
     [name, value]
   );
@@ -88,11 +85,11 @@ export default function Products({ products, orders, setOrders }) {
               "--tw-translate-x": `calc(100vw * (${1 - focus} / 3))`,
             }}
           >
-            {products.map((product, index) => (
+            {display.map((product, index) => (
               <Product
                 key={product.name}
                 className="flex-shrink-0"
-                isFocus={isFocus(product)}
+                isFocus={index === focus}
                 onClick={() => setFocus(index)}
                 {...product}
               />
@@ -101,13 +98,13 @@ export default function Products({ products, orders, setOrders }) {
         </div>
 
         <nav className="flex w-full justify-center space-x-2 py-4">
-          {products.map((product, index) => (
+          {display.map((product, index) => (
             <button
               type="button"
               key={product.name}
               className={clsx(
                 "bg-primary w-3 h-3 rounded-full transform",
-                isFocus(product) || "scale-60 opacity-50"
+                index === focus || "scale-60 opacity-50"
               )}
               onClick={() => setFocus(index)}
             ></button>

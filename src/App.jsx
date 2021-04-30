@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { ProductProvider } from "./contexts/products";
+import { OrderProvider } from "./contexts/orders";
 
 import Entry from "./pages/Entry";
 import Order from "./pages/Order";
@@ -11,23 +12,23 @@ import "./server";
 function App() {
   return (
     <ProductProvider>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Entry />
-          </Route>
+      <OrderProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Entry />
+            </Route>
 
-          <Route path={["/products/:product", "/products"]}>
-            <ProductProvider>
+            <Route path={["/products/:product", "/products"]}>
               <Order />
-            </ProductProvider>
-          </Route>
+            </Route>
 
-          <Route path="/checkout">
-            <Checkout />
-          </Route>
-        </Switch>
-      </Router>
+            <Route path="/checkout">
+              <Checkout />
+            </Route>
+          </Switch>
+        </Router>
+      </OrderProvider>
     </ProductProvider>
   );
 }

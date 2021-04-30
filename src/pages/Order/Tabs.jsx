@@ -4,9 +4,11 @@ import { useHistory, Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import anime from "animejs";
 
-export default function Tabs({ types }) {
+export default function Tabs({ products }) {
   const { product } = useParams();
   const history = useHistory();
+
+  const types = [...new Set(products.map(({ type }) => type))];
 
   useEffect(() => {
     if (types.includes(product)) return;

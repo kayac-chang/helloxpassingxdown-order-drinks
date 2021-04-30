@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { Input, X, Circle } from "../../components";
+import { useOrderDispatch } from "../../contexts/orders";
 
 function Order({ title, onCancel, sugar, ice, onSugarChange, onIceChange }) {
   return (
@@ -65,33 +66,22 @@ function Order({ title, onCancel, sugar, ice, onSugarChange, onIceChange }) {
   );
 }
 
-export default function Orders({ orders, setOrders }) {
-  const orderList = Object.entries(orders).reduce(
-    (list, [name, orders]) => [
-      ...list,
-      ...orders.map((order) => ({ name, sugar: 50, ice: 50, ...order })),
-    ],
+export default function Orders({ orders }) {
+  const dispatch = useOrderDispatch();
+
+  const orderList = Object.entries(orders)
+    .map(([name, orders]) => orders.map((order) => ({ ...order, name })))
+    .flat();
+
+  const onCancel = useCallback(
+    ({ name, id }) => dispatch({ type: "remove", payload: { name, id } }),
     []
   );
 
-  const onCancel = useCallback((order) => {
-    setOrders((orders) => ({
-      ...orders,
-      [order.name]: orders[order.name].filter(({ id }) => id !== order.id),
-    }));
-  }, []);
-
   const onChange = useCallback(
-    ({ name, id, sugar, ice }) => {
-      const list = orders[name];
-
-      const order = list.find((order) => id === order.id);
-      order.sugar = sugar;
-      order.ice = ice;
-
-      setOrders({ ...orders });
-    },
-    [orders]
+    ({ name, id, sugar, ice }) =>
+      dispatch({ type: "update", payload: { name, id, sugar, ice } }),
+    []
   );
 
   return (
