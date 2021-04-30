@@ -19,7 +19,7 @@ export default function Tabs({ products }) {
   const isActive = equals(product);
 
   return (
-    <nav className="space-x-2 flex flex-nowrap items-end overflow-scroll">
+    <nav className="space-x-2 flex flex-nowrap items-end overflow-auto">
       {types.map((item) => (
         <Link
           key={item}

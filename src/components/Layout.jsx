@@ -4,7 +4,7 @@ import { BlueLine } from "./Shape";
 export function Layout({ children, className }) {
   return (
     <div className="overflow-hidden relative">
-      <div className="h-screen bg-background font-heiti py-4 flex flex-col overflow-scroll">
+      <div className="h-screen bg-background font-heiti py-4 flex flex-col overflow-auto">
         <div className="space-y-2 w-full">
           <BlueLine className="border-b-4" />
           <BlueLine className="border-b-8" />

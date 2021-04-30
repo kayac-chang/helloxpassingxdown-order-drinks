@@ -9,7 +9,7 @@ import { useOrderDispatch } from "../../contexts/orders";
 
 function Title({ name, price }) {
   return (
-    <div className="py-2 max-w-xxs">
+    <div className="p-2">
       <h1 className="text-5xl text-primary">{name}</h1>
       <h2 className="text-2xl text-on-primary">${price}</h2>
     </div>
@@ -29,7 +29,7 @@ function Product({ className, style, name, img, isFocus, onClick }) {
       }}
       onClick={onClick}
     >
-      <img src={img} alt={name} draggable={false} />
+      <img src={img} alt={name} draggable={false} className="mx-auto" />
     </div>
   );
 }

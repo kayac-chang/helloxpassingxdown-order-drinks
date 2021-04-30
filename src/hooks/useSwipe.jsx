@@ -5,6 +5,7 @@ function unify(e) {
 }
 
 export function useSwipe() {
+  // there is a bug here, its does not stop swiping on the last item
   const [direction, setDirection] = useState(0);
   const [originX, setOriginX] = useState(0);
 
