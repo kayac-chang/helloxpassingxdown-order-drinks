@@ -1,8 +1,23 @@
-import { createContext, useReducer, useContext } from "react";
-import { append, filter, map } from "ramda";
+import { createContext, useReducer, useContext, useCallback } from "react";
+import { append, filter, map, slice } from "ramda";
+import { createOrder } from "../api";
 
 const OrderStateContext = createContext();
 const OrderDispatchContext = createContext();
+
+function useThunkReducer() {
+  const [state, dispatch] = useReducer(OrderReducer, {});
+
+  const enhanceDispatch = useCallback((prop) => {
+    if (typeof prop === "function") {
+      return prop(dispatch);
+    }
+
+    return dispatch(prop);
+  }, []);
+
+  return [state, enhanceDispatch];
+}
 
 function OrderReducer(state, action) {
   if (action.type === "add") {
@@ -35,17 +50,38 @@ function OrderReducer(state, action) {
   if (action.type === "remove") {
     const { name, id } = action.payload;
 
+    const apply = id ? filter((order) => order.id !== id) : slice(0, -1);
+
     return {
       ...state,
-      [name]: filter((order) => order.id !== id)(state[name]),
+      [name]: apply(state[name]),
     };
+  }
+
+  if (action.type === "submit") {
+    return {};
   }
 
   return state;
 }
 
+export function SubmitAction(orders) {
+  const payload = Object.entries(orders)
+    .map(([name, orders]) =>
+      orders.map(({ sugar, ice }) => ({ name, sugar, ice }))
+    )
+    .flat();
+
+  return (dispatch) =>
+    createOrder(payload).then((res) => {
+      dispatch({ type: "submit" });
+
+      return res;
+    });
+}
+
 export function OrderProvider({ children }) {
-  const [state, dispatch] = useReducer(OrderReducer, {});
+  const [state, dispatch] = useThunkReducer(OrderReducer, {});
 
   return (
     <OrderStateContext.Provider value={state}>

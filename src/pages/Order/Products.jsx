@@ -50,8 +50,8 @@ export default function Products({ products, orders }) {
   }, [direction]);
 
   const display = products.filter(({ type }) => type === product);
-  const name = display[focus].name;
-  const price = display[focus].price;
+  const name = display[focus]?.name;
+  const price = display[focus]?.price;
   const value = orders[name]?.length || 0;
 
   const onChange = useCallback(

@@ -1,7 +1,13 @@
 import { range } from "ramda";
+import { useLocation } from "react-router-dom";
 import { Logo, Layout } from "../components";
 
 export default function Checkout() {
+  const location = useLocation();
+  const { orders } = location.state;
+
+  console.log(orders);
+
   return (
     <Layout>
       <header className="flex justify-center z-10">
@@ -18,11 +24,15 @@ export default function Checkout() {
         <div className="flex divide-x divide-primary text-on-primary">
           <div className="flex-1">
             <ol className="space-y-4">
-              {range(0, 4).map((key) => (
-                <li key={key}>
+              {orders.items.map(({ name, sugar, ice }, index) => (
+                <li key={name + index}>
                   <div>
-                    <h3 className="text-lg">{key + 1}. Black Tea</h3>
-                    <p className="text-primary text-xs">Sugar 50%, Ice 20%</p>
+                    <h3 className="text-lg">
+                      {index + 1}. {name}
+                    </h3>
+                    <p className="text-primary text-xs">
+                      Sugar {sugar}%, Ice {ice}%
+                    </p>
                   </div>
                 </li>
               ))}
@@ -30,8 +40,10 @@ export default function Checkout() {
           </div>
 
           <div className="flex-1 flex flex-col justify-center items-center">
-            <h2 className="text-4xl">$385</h2>
-            <p className="w-full flex justify-end">/5 CUPS</p>
+            <h2 className="text-4xl">${orders.price}</h2>
+            <p className="w-full flex justify-end">
+              /{orders.items.length} CUP{orders.items.length > 1 ? "S" : ""}
+            </p>
           </div>
         </div>
       </main>

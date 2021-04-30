@@ -1,8 +1,10 @@
-import { useHistory } from "react-router-dom";
 import clsx from "clsx";
+import { useHistory } from "react-router";
+import { SubmitAction, useOrderDispatch } from "../../contexts/orders";
 
 export default function Checkout({ orders, products }) {
   const history = useHistory();
+  const dispatch = useOrderDispatch();
 
   const { total, count } = Object.entries(orders).reduce(
     ({ total, count }, [name, orders]) => {
@@ -19,7 +21,9 @@ export default function Checkout({ orders, products }) {
   function onSubmit(event) {
     event.preventDefault();
 
-    history.push("/checkout");
+    dispatch(SubmitAction(orders)).then((orders) =>
+      history.push("/checkout", { orders })
+    );
   }
 
   if (count <= 0) return <></>;
